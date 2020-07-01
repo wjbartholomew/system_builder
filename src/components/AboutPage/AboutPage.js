@@ -9,7 +9,7 @@ const AboutPage = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        Welcome to the Stereo System Builder. Choosing to create a new high-end home stereo system can be easy. The application will guide you to pick all the necessary components and alert you to any potential component mismatches. Just click below to start. 
       </p>
     </div>
   </div>
