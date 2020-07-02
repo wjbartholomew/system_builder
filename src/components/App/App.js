@@ -14,8 +14,16 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+// import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
+import Home from '../Home/Home';
+import CreateNewSystem from '../CreateNewSystem/CreateNewSystem';
+import ChooseComponents from '../ChooseComponents/ChooseSource';
+import SelectCategory from '../SelectCategory/SelectCategory';
+import InsertCustom from '../InsertCustom/InsertCustom';
+import ExistingSystems from '../ExistingSystems/ExistingSystems';
+import SystemDetails from '../SystemDetails/SystemDetails';
+import AdminPage from '../AdminPage/AdminPage';
 
 import './App.css';
 
@@ -34,10 +42,46 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
+            
             <Route
               exact
               path="/about"
               component={AboutPage}
+            />
+            <Route
+              exact
+              path="/create"
+              component={CreateNewSystem}
+            />
+            <Route
+              exact
+              path="/choose"
+              component={ChooseComponents}
+            />
+            <Route
+              exact
+              path="/select"
+              component={SelectCategory}
+            />
+            <Route
+              exact
+              path="/insert"
+              component={InsertCustom}
+            />
+            <Route
+              exact
+              path="/existing"
+              component={ExistingSystems}
+            />
+            <Route
+              exact
+              path="/details"
+              component={SystemDetails}
+            />
+            <Route
+              exact
+              path="/admin"
+              component={AdminPage}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
@@ -46,7 +90,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/home"
-              component={UserPage}
+              component={Home}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}

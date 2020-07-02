@@ -1,0 +1,17 @@
+
+
+.component {
+    height: 250px;
+    width: 250px;
+    display: inline-block;
+    background-color: darkcyan;
+    margin: 10px;
+    border-style: solid;
+    justify-content: center;
+    
+}
+
+.componnent, img {
+    height: 100px;
+    width: auto;
+}
