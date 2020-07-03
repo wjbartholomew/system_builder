@@ -4,8 +4,9 @@ import axios from 'axios';
 
 
 function* addSource(action) {
+    console.log('in add saga', action.payload)
     try {
-        const source = axios.get(`/components/${action.payload}`)
+        const source = yield axios.get(`/system/${action.payload}`)
         yield put({ type: 'SET_SOURCE', payload: source.data })
     } catch(error){
         console.log('GET FAILED', error)

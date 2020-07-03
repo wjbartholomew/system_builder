@@ -1,7 +1,11 @@
-const source = (state = [], action) => {
+
+const source = (state=[], action) => {
     switch (action.type) {
         case 'SET_SOURCE':
-            return action.payload;
+            return [...state, ...action.payload];
+        case 'DELETE_SOURCE':
+            const sourceIndex = action.payload
+            return state.filter(source => source !== state[sourceIndex])
         default:
             return state;
     }

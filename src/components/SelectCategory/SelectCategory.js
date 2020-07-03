@@ -7,13 +7,35 @@ class SelectCategory extends Component {
         this.props.history.push('/choose')
     }
 
+    deleteSource = (event) => {
+        console.log('in delete source function');
+        console.log('delete source event value:', event.target.value);
+        this.props.dispatch({
+            type: 'DELETE_SOURCE',
+            payload: event.target.value
+        })
+    }
+
+    
+
     render() {
         return (
             <div>
                 <h1>Select a Category to Begin!</h1>
 
-                <div>
+                <div className="category">
                     <h2>Source Components</h2>
+                    <div>
+                        {this.props.state.source.map((item,index) => (
+                            <div key={index} className="component">
+                                <p>Brand: {item.brand}</p>
+                                <p>Name: {item.name}</p>
+                                <img src={item.image} alt={item.name}></img>
+                                <button value={index} onClick={(event) => this.deleteSource(event)}>Delete Component</button>
+                            </div>
+                        ))}
+
+                    </div>
                     <button onClick={this.goToChoose}>Add Component</button>
                 </div>
                 <div>

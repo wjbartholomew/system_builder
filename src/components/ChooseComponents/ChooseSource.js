@@ -19,8 +19,8 @@ class ChooseComponent extends Component {
     }
 
     addSource = (event) => {
-        console.log('in addSource')
-        console.log('value', event.target.value)
+        console.log('in addSource to system')
+        console.log('event value for adding source', event.target.value)
         this.props.dispatch({
             type: 'ADD_TO_SOURCE',
             payload: event.target.value
