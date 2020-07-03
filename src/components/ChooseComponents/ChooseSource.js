@@ -5,13 +5,28 @@ import './ChooseComponent.css'
 class ChooseComponent extends Component {
 
     componentDidMount () {
+        this.getComponents();
+    }
+
+    getComponents = () => {
         this.props.dispatch({
-            type:'GET_SOURCES'
+            type: 'GET_SOURCES'
         })
     }
 
     goToInsert = () => {
-        this.props.history.push('/insert')
+        this.props.history.push('/insert');
+    }
+
+    addSource = (event) => {
+        console.log('in addSource')
+        console.log('value', event.target.value)
+        this.props.dispatch({
+            type: 'ADD_TO_SOURCE',
+            payload: event.target.value
+        })
+        this.props.history.push('/select');
+        this.getComponents();
     }
 
     render() {
@@ -24,7 +39,7 @@ class ChooseComponent extends Component {
                             <p>Brand: {item.brand}</p>
                             <p>Name: {item.name}</p>
                             <img src={item.image} alt={item.name}></img>
-                            <button onClick={this.goToInsert}>Insert Component</button>
+                            <button value={item.id} onClick={(event) => this.addSource(event)}>Insert Component</button>
                         </div>
                     ))}
                     
