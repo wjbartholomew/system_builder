@@ -4,6 +4,10 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import componentsSaga from './componentsSaga';
 import sourceSaga from './sourceSaga';
+import amplificationSaga from './amplificationSaga';
+import speakerSaga from './speakerSaga';
+import cablesSaga from './cablesSaga';
+import accessoriesSaga from './accessoriesSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -18,6 +22,10 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     componentsSaga(),
-    sourceSaga()
+    sourceSaga(),
+    amplificationSaga(),
+    speakerSaga(),
+    cablesSaga(),
+    accessoriesSaga(),
   ]);
 }

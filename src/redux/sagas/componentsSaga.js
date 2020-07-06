@@ -5,7 +5,7 @@ import axios from 'axios';
 function* getSources() {
     try{
         const sources = yield axios.get('/components/sources')
-        yield put ({type: 'SET_SOURCES', payload: sources.data})
+        yield put({ type: 'SET_AVAILABLE_SOURCES', payload: sources.data})
     }catch(error) {
     console.log('GET FAILED:', error)}
 }
@@ -13,7 +13,7 @@ function* getSources() {
 function* getAmplification() {
     try {
         const amplification = yield axios.get('/components/amplification')
-        yield put({ type: 'SET_AMPLIFICATION', payload: amplification.data })
+        yield put({ type: 'SET_AVAILABLE_AMPLIFICATION', payload: amplification.data })
     } catch (error) {
         console.log('GET FAILED:', error)
     }
@@ -22,7 +22,7 @@ function* getAmplification() {
 function* getSpeakers() {
     try {
         const speakers = yield axios.get('/components/speakers')
-        yield put({ type: 'SET_SPEAKERS', payload: speakers.data })
+        yield put({ type: 'SET_AVAILABLE_SPEAKERS', payload: speakers.data })
     } catch (error) {
         console.log('GET FAILED:', error)
     }
@@ -31,7 +31,7 @@ function* getSpeakers() {
 function* getCables() {
     try {
         const cables = yield axios.get('/components/cables')
-        yield put({ type: 'SET_CABLES', payload: cables.data })
+        yield put({ type: 'SET_AVAILABLE_CABLES', payload: cables.data })
     } catch (error) {
         console.log('GET FAILED:', error)
     }
@@ -40,7 +40,7 @@ function* getCables() {
 function* getAccessories() {
     try {
         const accessories = yield axios.get('/components/accessories')
-        yield put({ type: 'SET_ACCESSORIES', payload: accessories.data })
+        yield put({ type: 'SET_AVAILABLE_ACCESSORIES', payload: accessories.data })
     } catch (error) {
         console.log('GET FAILED:', error)
     }

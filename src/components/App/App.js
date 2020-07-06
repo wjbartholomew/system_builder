@@ -18,7 +18,11 @@ import AboutPage from '../AboutPage/AboutPage';
 import InfoPage from '../InfoPage/InfoPage';
 import Home from '../Home/Home';
 import CreateNewSystem from '../CreateNewSystem/CreateNewSystem';
-import ChooseComponents from '../ChooseComponents/ChooseSource';
+import ChooseSource from '../ChooseComponents/ChooseSource';
+import ChooseAmplification from '../ChooseComponents/ChooseAmplification';
+import ChooseSpeakers from '../ChooseComponents/ChooseSpeakers';
+import ChooseCables from '../ChooseComponents/ChooseCables';
+import ChooseAccessories from '../ChooseComponents/ChooseAccessories';
 import SelectCategory from '../SelectCategory/SelectCategory';
 import InsertCustom from '../InsertCustom/InsertCustom';
 import ExistingSystems from '../ExistingSystems/ExistingSystems';
@@ -55,8 +59,28 @@ class App extends Component {
             />
             <Route
               exact
-              path="/choose"
-              component={ChooseComponents}
+              path="/choosesource"
+              component={ChooseSource}
+            />
+            <Route
+              exact
+              path="/chooseamplification"
+              component={ChooseAmplification}
+            />
+            <Route
+              exact
+              path="/choosespeakers"
+              component={ChooseSpeakers}
+            />
+            <Route
+              exact
+              path="/choosecables"
+              component={ChooseCables}
+            />
+            <Route
+              exact
+              path="/chooseaccessories"
+              component={ChooseAccessories}
             />
             <Route
               exact

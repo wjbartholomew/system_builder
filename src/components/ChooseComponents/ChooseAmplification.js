@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ChooseComponent.css'
 
-class ChooseSource extends Component {
+class ChooseAmplification extends Component {
 
-    componentDidMount () {
+    componentDidMount() {
         this.getComponents();
     }
 
     getComponents = () => {
         this.props.dispatch({
-            type: 'GET_SOURCES'
+            type: 'GET_AMPLIFICATION'
         })
     }
 
@@ -18,11 +18,11 @@ class ChooseSource extends Component {
         this.props.history.push('/insert');
     }
 
-    addSource = (event) => {
-        console.log('in addSource to system')
-        console.log('event value for adding source', event.target.value)
+    addAmplification = (event) => {
+        console.log('in addAmplification to system')
+        console.log('event value(item id) for adding amplification', event.target.value)
         this.props.dispatch({
-            type: 'ADD_TO_SOURCE',
+            type: 'ADD_TO_AMPLIFICATION',
             payload: event.target.value
         })
         this.props.history.push('/select');
@@ -32,16 +32,16 @@ class ChooseSource extends Component {
         return (
             <div>
                 <h1>Choose a Component!</h1>
-                <div> 
+                <div>
                     {this.props.state.components.map(item => (
                         <div key={item.id} className="component">
                             <p>Brand: {item.brand}</p>
                             <p>Name: {item.name}</p>
                             <img src={item.image} alt={item.name}></img>
-                            <button value={item.id} onClick={(event) => this.addSource(event)}>Insert Component</button>
+                            <button value={item.id} onClick={(event) => this.addAmplification(event)}>Insert Component</button>
                         </div>
                     ))}
-                    
+
                 </div>
 
                 <div className="component">
@@ -59,4 +59,4 @@ const mapStateToProps = state => ({
     state
 });
 
-export default connect(mapStateToProps)(ChooseSource);
+export default connect(mapStateToProps)(ChooseAmplification);
