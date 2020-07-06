@@ -3,6 +3,16 @@ import { connect } from 'react-redux';
 
 class SelectCategory extends Component {
 
+    state = {
+        systemAttributes: {
+            totalSystemPrice: 0,
+            mostExpensiveComponent: '',
+            analogDigital: '',
+            potentialMismatches: '',
+            requiredAccessories: ''
+        }
+    }
+
     goToSource = () => {
         this.props.history.push('/choosesource')
     }
@@ -59,6 +69,33 @@ class SelectCategory extends Component {
             payload: event.target.value
         })
     }
+
+componentDidUpdate(){
+    this.totalSystemPrice();
+}
+
+
+totalSystemPrice = () => {
+    let systemPrice = 0;
+    this.props.state.source.map(item => 
+        systemPrice = systemPrice + parseInt(item.price))
+    this.props.state.amplification.map(item =>
+        systemPrice = systemPrice + parseInt(item.price))
+    this.props.state.speakers.map(item =>
+        systemPrice = systemPrice + parseInt(item.price))
+    this.props.state.cables.map(item =>
+        systemPrice = systemPrice + parseInt(item.price))
+    this.props.state.accessories.map(item =>
+        systemPrice = systemPrice + parseInt(item.price))
+    console.log('totalSystemPrice is ', systemPrice)
+
+
+    this.props.dispatch({
+        type: 'SET_SYSTEM_PRICE',
+        payload: systemPrice
+    })
+
+}
 
     
 
@@ -148,7 +185,7 @@ class SelectCategory extends Component {
                     <h3>System Name: {this.props.state.newSystem.name}</h3>
                     <p>Description: {this.props.state.newSystem.description}</p>
                     <p>Recommendations: {this.props.state.newSystem.recommendations}</p>
-                    <p>Total Price:</p>
+                    <p>Total Price: {this.props.state.systemPrice}</p>
                     <p>Most Expensive Component:</p>
                     <p>Appropriate for a room of size:</p>
                     <p>Analog/digital:</p>

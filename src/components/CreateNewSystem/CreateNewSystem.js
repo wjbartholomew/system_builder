@@ -194,7 +194,7 @@ outputRecommendations = () => {
             return {
                 newSystem: {
                     ...state.newSystem,
-                recommendations: 'Based on the large size of your r it is suggested that you choose speakers with medium or high bass output to achieve a "room filling" sound. If speakers with high bass output are chosen it is suggested that you apply some bass absorption in your room to mitigate any possible bass issues (see accessories).  Given your listening habits and large sized room, it is suggested to only pair high-sensitivity speakers with low-output amplifiers. All other combinations may suit your needs.' }}
+                recommendations: 'Based on the large size of your room it is suggested that you choose speakers with medium or high bass output to achieve a "room filling" sound. If speakers with high bass output are chosen it is suggested that you apply some bass absorption in your room to mitigate any possible bass issues (see accessories).  Given your listening habits and large sized room, it is suggested to only pair high-sensitivity speakers with low-output amplifiers. All other combinations may suit your needs.' }}
         }
         else if (state.systemAttributes.roomSize === 'large' && state.systemAttributes.outputValue === '2') {
             return {
@@ -308,7 +308,7 @@ outputRecommendations = () => {
 
                 {
                     
-                    this.props.state.userInput === 2 && this.state.dimensions.height !== 1 && this.state.dimensions.width !== 1 && this.state.dimensions.length !== 1 ? this.state.newSystem.recommendations:<p>Please choose an answer from the dropdown above to recieve recommendations.</p>
+                    this.props.state.userInput === 2 && this.state.dimensions.height !== 1 && this.state.dimensions.width !== 1 && this.state.dimensions.length !== 1 ? <p>{this.state.newSystem.recommendations}</p> :<p>Please choose an answer from the dropdown above to recieve recommendations.</p>
                 }
 
                 <button onClick={this.goToChoose}>Choose Components</button>
