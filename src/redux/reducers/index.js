@@ -11,9 +11,12 @@ import accessories from './accessoriesReducer'
 import userInput from './userInputReducer'
 import newSystem from './newSystemReducer'
 import systemPrice from './systemPriceReducer'
-
-
-
+import expensiveComponent from './mostExpensiveComponentReducer'
+import sourceType from './sourceTypeReducer'
+import roomSize from './roomSizeReducer'
+import userRoomSize from './userRoomSizeReducer'
+import potentialMismatches from './potentialMismatchesReducer'
+import userListeningHabits from './userListeningHabitsReducer'
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -32,7 +35,13 @@ const rootReducer = combineReducers({
   speakers,
   cables,
   accessories,
-  systemPrice
+  systemPrice,
+  expensiveComponent,
+  sourceType,
+  roomSize,
+  userRoomSize,
+  potentialMismatches,
+  userListeningHabits
 });
 
 export default rootReducer;
