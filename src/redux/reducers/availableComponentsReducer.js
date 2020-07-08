@@ -1,6 +1,6 @@
-const expensiveComponent = (state = 0, action) => {
+const availableComponents = (state = [], action) => {
     switch (action.type) {
-        case 'SET_MOST_EXPENSIVE_COMPONENT':
+        case 'SET_AVAILABLE_COMPONENTS':
             return action.payload;
         default:
             return state;
@@ -9,4 +9,4 @@ const expensiveComponent = (state = 0, action) => {
 
 // componentsReducer will be on the redux state at:
 // state.componentsReducer
-export default expensiveComponent;
+export default availableComponents;

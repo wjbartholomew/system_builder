@@ -10,7 +10,7 @@ class ChooseSpeakers extends Component {
 
     getComponents = () => {
         this.props.dispatch({
-            type: 'GET_SPEAKERS'
+            type: 'GET_COMPONENTS'
         })
     }
 
@@ -18,11 +18,11 @@ class ChooseSpeakers extends Component {
         this.props.history.push('/insert');
     }
 
-    addSpeakers = (event) => {
-        console.log('in addSource to system')
-        console.log('event value for adding source', event.target.value)
+    addComponent = (event) => {
+        console.log('in addComponent to system')
+        console.log('event value for adding component', event.target.value)
         this.props.dispatch({
-            type: 'ADD_TO_SPEAKERS',
+            type: 'ADD_TO_SYSTEM_COMPONENTS',
             payload: event.target.value
         })
         this.props.history.push('/select');
@@ -33,14 +33,21 @@ class ChooseSpeakers extends Component {
             <div>
 
                 <div>
-                    {this.props.state.components.map(item => (
-                        <div key={item.id} className="component">
-                            <p>Brand: {item.brand}</p>
-                            <p>Name: {item.name}</p>
-                            <img src={item.image} alt={item.name}></img>
-                            <button value={item.id} onClick={(event) => this.addSpeakers(event)}>Insert Component</button>
-                        </div>
-                    ))}
+                    {this.props.state.availableComponents.map(item => {
+
+                        if (item.component_category_name === 'Speakers') {
+
+                            return <div key={item.id} className="component">
+                                <p>Brand: {item.brand}</p>
+                                <p>Name: {item.name}</p>
+                                <img src={item.image} alt={item.name}></img>
+                                <button value={item.id} onClick={(event) => this.addComponent(event)}>Insert Component</button>
+                            </div>
+                        }
+                        else {
+                            return null
+                        }
+                    })}
 
                 </div>
 

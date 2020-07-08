@@ -10,7 +10,7 @@ class ChooseSource extends Component {
 
     getComponents = () => {
         this.props.dispatch({
-            type: 'GET_SOURCES'
+            type: 'GET_COMPONENTS'
         })
     }
 
@@ -18,11 +18,11 @@ class ChooseSource extends Component {
         this.props.history.push('/insert');
     }
 
-    addSource = (event) => {
-        console.log('in addSource to system')
-        console.log('event value for adding source', event.target.value)
+    addComponent = (event) => {
+        console.log('in addComponent to system')
+        console.log('event value for adding component', event.target.value)
         this.props.dispatch({
-            type: 'ADD_TO_SOURCE',
+            type: 'ADD_TO_SYSTEM_COMPONENTS',
             payload: event.target.value
         })
         this.props.history.push('/select');
@@ -33,14 +33,21 @@ class ChooseSource extends Component {
             <div>
                 <h1>Choose a Component!</h1>
                 <div> 
-                    {this.props.state.components.map(item => (
-                        <div key={item.id} className="component">
-                            <p>Brand: {item.brand}</p>
-                            <p>Name: {item.name}</p>
-                            <img src={item.image} alt={item.name}></img>
-                            <button value={item.id} onClick={(event) => this.addSource(event)}>Insert Component</button>
-                        </div>
-                    ))}
+                    {this.props.state.availableComponents.map(item => {
+
+                        if(item.component_category_name === 'Source'){
+
+                        return  <div key={item.id} className="component">
+                                    <p>Brand: {item.brand}</p>
+                                    <p>Name: {item.name}</p>
+                                    <img src={item.image} alt={item.name}></img>
+                                    <button value={item.id} onClick={(event) => this.addComponent(event)}>Insert Component</button>
+                                </div>
+                        }
+                        else {
+                            return null
+                        }
+                    })}
                     
                 </div>
 

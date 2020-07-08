@@ -2,12 +2,9 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
-import componentsSaga from './componentsSaga';
-import sourceSaga from './sourceSaga';
-import amplificationSaga from './amplificationSaga';
-import speakerSaga from './speakerSaga';
-import cablesSaga from './cablesSaga';
-import accessoriesSaga from './accessoriesSaga';
+import availableComponentsSaga from './availableComponentsSaga';
+import newSystemSaga from './newSystemSaga';
+import systemComponentsSaga from './systemComponentsSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,11 +18,8 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     userSaga(),
-    componentsSaga(),
-    sourceSaga(),
-    amplificationSaga(),
-    speakerSaga(),
-    cablesSaga(),
-    accessoriesSaga(),
+    availableComponentsSaga(),
+    newSystemSaga(),
+    systemComponentsSaga()
   ]);
 }
