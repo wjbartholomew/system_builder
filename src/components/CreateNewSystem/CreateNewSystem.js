@@ -8,7 +8,7 @@ class CreateNewSystem extends Component {
             name: '',
             description: '',
             recommendations: '',
-         },
+        },
         dimensions: {
             height: 1,
             width: 1,
@@ -17,8 +17,8 @@ class CreateNewSystem extends Component {
         systemAttributes: {
             volume: '',
             roomSize: '',
-            idealOutput: 'dono',
-            outputValue: ''
+            idealOutput: '',
+            outputValue: 0
         }
     })
 
@@ -54,7 +54,7 @@ goToChoose = () => {
 console.log('this.state.newSystem', this.state.newSystem)
     this.props.dispatch({
         type:'SET_NEW_SYSTEM',
-        payload: this.state.newSystem
+        payload: this.state
     })
 
     this.props.history.push('/select')
@@ -103,52 +103,11 @@ handleIdealOutput = (event) => {
         }
     })
 
-    this.props.dispatch({
-        type: 'SET_USER_LISTENING_HABITS',
-        payload: event.target.value
-    })
-
     this.setIdealOutput();
 
-    // let value = event.target.value;
-
-    //     this.setState((state) => {
-    //         if (value === 1) {
-    //             return {systemAttributes: {...state.systemAttributes, idealOutput: 'low' }}
-    //         }
-    //         else if (value === 2) {
-    //             return {systemAttributes: {...state.systemAttributes, idealOutput: 'high'}}
-    //         }
-    // })
-
-    // if(event.target.value === 1) {
-    //     this.setState({
-    //         systemAttributes: {...this.state.systemAttributes, idealOutput: 'low'}
-    //     })
-    // }
-    // else if(event.target.value === 2) {
-    //     this.setState({
-    //         systemAttributes: { ...this.state.systemAttributes, idealOutput: 'high' }
-    //     })
-    // }   
-    
-    
-    this.props.dispatch({
-        type:'SET_USER_INPUT',
-    })
 }
 
 setIdealOutput = () => {
-
-
-    // this.setState((state) => {
-    //         if (value === 1) {
-    //             return {systemAttributes: {...state.systemAttributes, idealOutput: 'low' }}
-    //         }
-    //         else if (value === 2) {
-    //             return {systemAttributes: {...state.systemAttributes, idealOutput: 'high'}}
-    //         }
-    // })
 
     this.setState((state) => {
         console.log('in set ideal output, outputValue:', state.systemAttributes.outputValue)
@@ -164,23 +123,13 @@ setIdealOutput = () => {
 }
 
 
-
-// componentDidUpdate() {
-//     this.outputRecommendations();
-// }
-
-
-
 outputRecommendations = () => {
 
     console.log('in outputRecommendations')
-    this.setState((state) => {
-        console.log('in set outputRec, roomSize:', state.systemAttributes.roomSize, 'outputValue:', state.systemAttributes.outputValue)
 
-        this.props.dispatch({
-            type: 'SET_USER_ROOM_SIZE',
-            payload: this.state.systemAttributes.roomSize
-        })
+    this.setState((state) => {
+
+        console.log('in set outputRec, roomSize:', state.systemAttributes.roomSize, 'outputValue:', state.systemAttributes.outputValue)
 
         if (state.systemAttributes.roomSize === 'small' && state.systemAttributes.outputValue === '1' ) {
             return { newSystem: {...state.newSystem, recommendations: 'Based on the size of your room it is suggested that you choose speakers with low and medium bass output. Speakers with a high bass output will likely overload your small room with bass pressure and compromise the sound. If medium or high output speakers are chosen it is suggested that you apply some bass absorbers in your room to mitigate any bass issues (see accessories).  Given your listening habits and small room, all amplifier output and speaker sensitivity combination may suit your needs.' }}
@@ -211,9 +160,7 @@ outputRecommendations = () => {
                 newSystem: {
                     ...state.newSystem,
                 recommendations: 'Based on the large size of your room it is suggested that you choose speakers with medium or high bass output to achieve a "room filling" sound. If speakers with high bass output are chosen it is suggested that you apply some bass absorption in your room to mitigate any possible bass issues (see accessories).  Given your listening habits and large sized room, it is suggested to only pair high-sensitivity speakers with low-output amplifiers and high-output amplifiers with low sensitivity speakers.' }}
-        }
-
-        
+        }      
     })
 }
 
@@ -319,7 +266,7 @@ outputRecommendations = () => {
 
 
                 {
-                    this.props.state.userInput === 2 && this.state.dimensions.height !== 1 && this.state.dimensions.width !== 1 && this.state.dimensions.length !== 1 ? <p>{this.state.newSystem.recommendations}</p> :<p>Please choose an answer from the dropdown above to recieve recommendations.</p>
+                    this.state.systemAttributes.outputValue !== 0 && this.state.dimensions.height !== 1 && this.state.dimensions.width !== 1 && this.state.dimensions.length !== 1 ? <p>{this.state.newSystem.recommendations}</p> :<p>Please choose an answer from the dropdown above to recieve recommendations.</p>
                 }
 
                 <button onClick={this.goToChoose}>Choose Components</button>

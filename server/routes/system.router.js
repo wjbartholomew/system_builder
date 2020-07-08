@@ -1,6 +1,5 @@
 const express = require('express');
 const pool = require('../modules/pool');
-const { response } = require('express');
 const router = express.Router();
 
 /**
@@ -11,7 +10,7 @@ router.get('/:id', (req, res) => {
     let query = `SELECT * FROM "Components" WHERE id = $1 ORDER BY id;`;
     pool.query(query, [req.params.id]).then(result => {
         res.send(result.rows);
-        console.log('result.rows',result.rows)
+        console.log('result.rows for adding a single component',result.rows)
     })
         .catch(error => {
             console.log('Error retrieving source components', error);
