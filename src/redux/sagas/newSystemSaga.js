@@ -3,18 +3,18 @@ import axios from 'axios';
 
 
 
-function* addNewSystem(action) {
-//     console.log('in add saga', action.payload)
-//     try {
-//         const cables = yield axios.get(`/system/${action.payload}`)
-//         yield put({ type: 'SET_CABLES', payload: cables.data })
-//     } catch (error) {
-//         console.log('GET FAILED', error)
-//     }
+function* saveSystemToDatabase(action) {
+    console.log('save to database')
+    try {
+        yield axios.post(`/system`, this.props.state.newSystem.newSystem)
+        yield put({ type: 'RESET_NEW_SYSTEM' })
+    } catch (error) {
+        console.log('POST FAILED', error)
+    }
 }
 
 function* newSystemSaga() {
-    yield takeLatest('ADD_TO_NEW_SYSTEM', addNewSystem);
+    yield takeLatest('SAVE_SYSTEM_TO_DATABASE', saveSystemToDatabase);
 }
 
 export default newSystemSaga;

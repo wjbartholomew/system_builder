@@ -20,31 +20,21 @@ class SelectCategory extends Component {
     goToAccessories = () => {
         this.props.history.push('/chooseaccessories')
     }
+    goToExistingSystems = () => {
+        this.props.history.push('/existing')
+    }
 
+    saveSystem = () => {
+        this.props.dispatch({
+            type: 'SAVE_SYSTEM_TO_DATABASE'
+        })
+    }
 
     deleteComponent = (event) => {
-        console.log('in delete component function');
-        console.log('delete component event value:', event.target.value);
         this.props.dispatch({
             type: 'DELETE_COMPONENT',
             payload: event.target.value
         })
-    }
-    
-
-    componentDidMount(){
-        this.appropriateRoomSize();
-        this.sourceType();
-        this.mostExpensiveComponent();
-        this.potentialMismatches();
-    }
-
-    componentDidUpdate(){
-        this.totalSystemPrice();
-        this.mostExpensiveComponent();
-        this.sourceType();
-        this.appropriateRoomSize();
-        this.potentialMismatches();
     }
 
 
@@ -54,11 +44,12 @@ class SelectCategory extends Component {
             systemPrice = systemPrice + parseInt(item.price))
         console.log('totalSystemPrice is ', systemPrice)
 
+        return systemPrice
 
-        this.props.dispatch({
-            type: 'SET_SYSTEM_PRICE',
-            payload: systemPrice
-        })
+        // this.props.dispatch({
+        //     type: 'SET_SYSTEM_PRICE',
+        //     payload: systemPrice
+        // })
     }
 
  
@@ -77,10 +68,12 @@ class SelectCategory extends Component {
         
         console.log('most expensive commponent is ', component)
 
-        this.props.dispatch({
-            type: 'SET_MOST_EXPENSIVE_COMPONENT',
-            payload: component
-        })
+        return component
+
+        // this.props.dispatch({
+        //     type: 'SET_MOST_EXPENSIVE_COMPONENT',
+        //     payload: component
+        // })
     }
 
 
@@ -112,12 +105,13 @@ class SelectCategory extends Component {
             sourceType = 'analog and digital'
         }
 
-        this.props.dispatch({
-            type:'SET_SOURCE_TYPE',
-            payload: sourceType
-        })
-    }
+        return sourceType
 
+        // this.props.dispatch({
+        //     type:'SET_SOURCE_TYPE',
+        //     payload: sourceType
+        // })
+    }
 
     appropriateRoomSize = () => {
 
@@ -202,19 +196,21 @@ class SelectCategory extends Component {
 
 
         console.log('appropriate room size', appropriateRoomSize)
+;
 
-        this.props.dispatch({
-            type: 'SET_APPROPRIATE_ROOM_SIZE',
-            payload: appropriateRoomSize
-        })
+        return appropriateRoomSize
+
+        
     }
 
     potentialMismatches = () => {
-        let userRoom  = this.props.state.newSystem.systemAttributes.roomSize;
-        let userListeningHabits = this.props.state.newSystem.systemAttributes.outputValue;
-        let bassOutput = '';
+        let userRoom  = this.props.state.newSystem.newSystem.userRoomSize;
+        let userListeningHabits = this.props.state.newSystem.newSystem.userListeningHabits;
+        let potentialMismatches = '';
         let powerOutput = '';
-        let potentialMismatches = 'none detected';
+        let speakerSensitivity = '';
+        let bassOutput = '';
+        let appropriateRoomSize = '';
 
         this.props.state.systemComponents.map(item => {
             if (item.component_category_name === 'Amplification') {
@@ -223,12 +219,75 @@ class SelectCategory extends Component {
         })
         this.props.state.systemComponents.map(item => {
             if (item.component_category_name === 'Speakers') {
+                speakerSensitivity = item.Sensitivity
+            }
+        })
+
+        this.props.state.systemComponents.map(item => {
+            if (item.component_category_name === 'Speakers') {
                 bassOutput = item.bass_output
             }
         })
 
+
+        console.log('bassOutput', bassOutput)
+        console.log('powerOutput', powerOutput)
+        console.log('speakerSensitivity', speakerSensitivity)
+
+        if (powerOutput === 'low' && speakerSensitivity === 'low' && bassOutput === 'low') {
+            appropriateRoomSize = 'small'
+        }
+        else if (powerOutput === 'low' && speakerSensitivity === 'high' && bassOutput === 'low') {
+            appropriateRoomSize = 'small or medium'
+        }
+        else if (powerOutput === 'low' && speakerSensitivity === 'high' && bassOutput === 'medium') {
+            appropriateRoomSize = 'small, medium or large'
+        }
+        else if (powerOutput === 'low' && speakerSensitivity === 'high' && bassOutput === 'high') {
+            appropriateRoomSize = 'medium or large'
+        }
+        else if (powerOutput === 'medium' && speakerSensitivity === 'high' && bassOutput === 'low') {
+            appropriateRoomSize = 'small or medium'
+        }
+        else if (powerOutput === 'medium' && speakerSensitivity === 'high' && bassOutput === 'medium') {
+            appropriateRoomSize = 'small, medium or large'
+        }
+        else if (powerOutput === 'medium' && speakerSensitivity === 'high' && bassOutput === 'high') {
+            appropriateRoomSize = 'small, medium or large'
+        }
+        else if (powerOutput === 'medium' && speakerSensitivity === 'low' && bassOutput === 'low') {
+            appropriateRoomSize = 'small or medium'
+        }
+        else if (powerOutput === 'medium' && speakerSensitivity === 'low' && bassOutput === 'medium') {
+            appropriateRoomSize = 'small, medium or large'
+        }
+        else if (powerOutput === 'medium' && speakerSensitivity === 'low' && bassOutput === 'high') {
+            appropriateRoomSize = 'medium or large'
+        }
+        else if (powerOutput === 'high' && speakerSensitivity === 'low' && bassOutput === 'low') {
+            appropriateRoomSize = 'small or medium'
+        }
+        else if (powerOutput === 'high' && speakerSensitivity === 'low' && bassOutput === 'medium') {
+            appropriateRoomSize = 'small, medium or large'
+        }
+        else if (powerOutput === 'high' && speakerSensitivity === 'low' && bassOutput === 'high') {
+            appropriateRoomSize = 'medium or large'
+        }
+        else if (powerOutput === 'high' && speakerSensitivity === 'high' && bassOutput === 'low') {
+            appropriateRoomSize = 'small or medium'
+        }
+        else if (powerOutput === 'high' && speakerSensitivity === 'high' && bassOutput === 'medium') {
+            appropriateRoomSize = 'small, medium or large'
+        }
+        else if (powerOutput === 'high' && speakerSensitivity === 'high' && bassOutput === 'high') {
+            appropriateRoomSize = 'medium or large'
+        }
+        else {
+            appropriateRoomSize = 'Please choose amplification and speakers'
+        }
+
         
-        if (this.props.state.newSystem.systemAttributes.roomSize.includes(userRoom) && userListeningHabits === '1'){
+        if (appropriateRoomSize.includes(userRoom) && userListeningHabits === '1'){
             potentialMismatches = 'Everything looks good!'
         }
         else if (userRoom === 'small') {
@@ -255,19 +314,16 @@ class SelectCategory extends Component {
         console.log('powerOutput', powerOutput)
         console.log('potentialMismatches', potentialMismatches)
 
+        return potentialMismatches
 
-        this.props.dispatch({
-            type: 'SET_POTENTIAL_MISMATCHES',   
-            payload: potentialMismatches
-        })
+        // this.props.dispatch({
+        //     type: 'SET_POTENTIAL_MISMATCHES',   
+        //     payload: potentialMismatches
+        // })
 
     }
 
-    saveSystem = () => {
-        this.props.dispatch({
-            type: 'SAVE_SYSTEM'
-        })
-    }
+    
 
 
     render() {
@@ -370,15 +426,15 @@ class SelectCategory extends Component {
                     <h3>System Name: {this.props.state.newSystem.newSystem.name}</h3>
                     <p>Description: {this.props.state.newSystem.newSystem.description}</p>
                     <p>Recommendations: {this.props.state.newSystem.newSystem.recommendations}</p>
-                    <p>Total Price: ${this.props.state.newSystem.newSystem.systemPrice}</p>
-                    <p>Most Expensive Component: {this.props.state.newSystem.newSystem.expensiveComponent}</p>
-                    <p>Appropriate for a room of size: {this.props.state.newSystem.newSystem.appropriateRoomSize}</p>
-                    <p>Analog/digital: {this.props.state.newSystem.newSystem.sourceType}</p>
-                    <p>Potential Component Mismatches: {this.props.state.newSystem.newSystem.potentialMismatches}</p>
+                    <p>Total Price: ${this.totalSystemPrice()}</p>
+                    <p>Most Expensive Component: {this.mostExpensiveComponent()}</p>
+                    <p>Appropriate for a room of size: {this.appropriateRoomSize()}</p>
+                    <p>Analog/digital: {this.sourceType()}</p>
+                    <p>Potential Component Mismatches: {this.potentialMismatches()}</p>
                 </div>
                 <div>
                     
-                    <button onClick={this.goToChoose}>Save System</button>
+                    <button onClick={this.goToExistingSystems}>Save System</button>
                     <button onClick={this.goToChoose}>Delete System</button>
                 </div>
 

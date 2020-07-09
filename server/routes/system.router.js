@@ -24,6 +24,12 @@ router.get('/:id', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
+    console.log('req.body',req.body)
+    let query = `
+    INSERT INTO "Saved_System" 
+    ('user_id', 'name', 'description', 'recommendations', 'appropriate_room_size', 'potential_mismatches', 'most_expensive_components', 'source_type', 'listening_habits', 'system_price')
+    VALUES 
+    ()`
 
 });
 

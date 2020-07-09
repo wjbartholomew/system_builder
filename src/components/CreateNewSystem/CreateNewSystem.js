@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 
 class CreateNewSystem extends Component {
 
+
+
     state = ({
         newSystem: {
             name: '',
             description: '',
             recommendations: '',
+            userRoomSize: '',
+            userListeningHabits: 0
         },
         dimensions: {
             height: 1,
@@ -16,27 +20,12 @@ class CreateNewSystem extends Component {
         },
         systemAttributes: {
             volume: '',
-            roomSize: '',
             idealOutput: '',
             outputValue: 0
         }
     })
 
-calculateRoomSize = () => {
 
-    this.setState((state) => {
-        if (state.systemAttributes.volume < 1100) {
-            return { systemAttributes: { ...state.systemAttributes, roomSize: 'small' } }
-        }
-        else if (state.systemAttributes.volume > 1100 && state.systemAttributes.volume < 2500) {
-            return { systemAttributes: { ...state.systemAttributes, roomSize: 'medium' } }
-        }
-        else if (state.systemAttributes.volume > 2500) {
-            return { systemAttributes: { ...state.systemAttributes, roomSize: 'large' } }
-        }
-    })
-
-}
 
 
 calculateVolume = () => {
@@ -48,10 +37,29 @@ calculateVolume = () => {
     this.calculateRoomSize();
     
 }
+
+
+calculateRoomSize = () => {
+        this.setState((state) => {
+            if (state.systemAttributes.volume < 1100) {
+                return { newSystem: { ...state.newSystem, userRoomSize: 'small' } }
+            }
+            else if (state.systemAttributes.volume > 1100 && state.systemAttributes.volume < 2500) {
+                return { newSystem: { ...state.newSystem, userRoomSize: 'medium' } }
+            }
+            else if (state.systemAttributes.volume > 2500) {
+                return { newSystem: { ...state.newSystem, userRoomSize: 'large' } }
+                
+            }
+        })
+
+    this.outputRecommendations();
+
+    }
     
 
-goToChoose = () => {
-console.log('this.state.newSystem', this.state.newSystem)
+goToChooseComponents = () => {
+console.log('setting new system with this.state', this.state)
     this.props.dispatch({
         type:'SET_NEW_SYSTEM',
         payload: this.state
@@ -82,45 +90,54 @@ handleChange = (event, type) => {
 
 handleDimensions = (event, type) => {
 
-    this.setState ({
+    this.setState({
         dimensions: {
             ...this.state.dimensions,
             [type]: event.target.value
         }
-    })
+        
+})
+
 
     this.calculateVolume();
     
 }
 
 
-handleIdealOutput = (event) => {
+handleUserListeningHabits = (event) => {
+
 
     this.setState({
-        systemAttributes: {
-            ...this.state.systemAttributes,
-            outputValue: event.target.value
+        newSystem: {
+            ...this.state.newSystem,
+            userListeningHabits: event.target.value
         }
     })
 
-    this.setIdealOutput();
+    // this.props.dispatch({
+    //     type: 'SET_USER_LISTENING_HABITS',
+    //     payload: event.target.value
+    // })
 
-}
-
-setIdealOutput = () => {
-
-    this.setState((state) => {
-        console.log('in set ideal output, outputValue:', state.systemAttributes.outputValue)
-        if(state.systemAttributes.outputValue === 1){
-            return {systemAttributes: { ...state.systemAttributes, idealOutput: 'low' }}
-        }
-        else if(state.systemAttributes.outputValue === 2) {
-                return { systemAttributes: { ...state.systemAttributes, idealOutput: 'high' } }
-            }
-        
-    })
+   
     this.outputRecommendations();
+
 }
+
+// setIdealOutput = () => {
+
+//     this.setState((state) => {
+//         console.log('in set ideal output, outputValue:', state.newSystem.outputValue)
+//         if(state.newSystem.outputValue === 1){
+//             return {newSystem: { ...state.newSystem, idealOutput: 'low' }}
+//         }
+//         else if(state.newSystem.outputValue === 2) {
+//                 return { newSystem: { ...state.newSystem, idealOutput: 'high' } }
+//             }
+        
+//     })
+//     this.outputRecommendations();
+// }
 
 
 outputRecommendations = () => {
@@ -129,33 +146,33 @@ outputRecommendations = () => {
 
     this.setState((state) => {
 
-        console.log('in set outputRec, roomSize:', state.systemAttributes.roomSize, 'outputValue:', state.systemAttributes.outputValue)
+        console.log('in set outputRec, userRoomSize:', state.newSystem.userRoomSize, 'userListeningHabits:', state.newSystem.userListeningHabits)
 
-        if (state.systemAttributes.roomSize === 'small' && state.systemAttributes.outputValue === '1' ) {
+        if (state.newSystem.userRoomSize === 'small' && state.newSystem.userListeningHabits === '1' ) {
             return { newSystem: {...state.newSystem, recommendations: 'Based on the size of your room it is suggested that you choose speakers with low and medium bass output. Speakers with a high bass output will likely overload your small room with bass pressure and compromise the sound. If medium or high output speakers are chosen it is suggested that you apply some bass absorbers in your room to mitigate any bass issues (see accessories).  Given your listening habits and small room, all amplifier output and speaker sensitivity combination may suit your needs.' }}
         }
-        else if (state.systemAttributes.roomSize === 'small' && state.systemAttributes.outputValue === '2') {
+        else if (state.newSystem.userRoomSize === 'small' && state.newSystem.userListeningHabits === '2') {
             return { newSystem: { ...state.newSystem, recommendations: 'Based on the size of your room it is suggested that you choose speakers with low and medium bass output. Speakers with a high bass output will likely overload your small room with bass pressure and compromise the sound. If medium or high output speakers are chosen it is suggested that you apply some bass absorption in your room to mitigate any bass issues (see accessories).  Given your listening habits and small room, it is suggested to only pair high-sensitivity speakers with low-output amplifiers. All other combination may suit your needs.' }}
         }
-        else if (state.systemAttributes.roomSize === 'medium' && state.systemAttributes.outputValue === '1') {
+        else if (state.newSystem.userRoomSize === 'medium' && state.newSystem.userListeningHabits === '1') {
             return {
                 newSystem: {
                     ...state.newSystem,
                 recommendations: 'Your room size may accomodate speakers with any bass output. If medium or high output speakers are chosen it is suggested that you apply some bass absorption in your room to mitigate any possible bass issues (see accessories).  Given your listening habits and medium sized room, it is suggested to only pair high-sensitivity speakers with low-output amplifiers. All other combinations may suit your needs.' }}
         }
-        else if (state.systemAttributes.roomSize === 'medium' && state.systemAttributes.outputValue === '2') {
+        else if (state.newSystem.userRoomSize === 'medium' && state.newSystem.userListeningHabits === '2') {
             return {
                 newSystem: {
                     ...state.newSystem,
                 recommendations: 'Your room size may accomodate speakers with any bass output. If medium or high output speakers are chosen it is suggested that you apply some bass absorption in your room to mitigate any possible bass issues (see accessories).  Given your listening habits and medium sized room, it is suggested to only pair high-sensitivity speakers with low-output amplifiers. All other combinations may suit your needs.' }}
         }
-        else if (state.systemAttributes.roomSize === 'large' && state.systemAttributes.outputValue === '1') {
+        else if (state.newSystem.userRoomSize === 'large' && state.newSystem.userListeningHabits === '1') {
             return {
                 newSystem: {
                     ...state.newSystem,
                 recommendations: 'Based on the large size of your room it is suggested that you choose speakers with medium or high bass output to achieve a "room filling" sound. If speakers with high bass output are chosen it is suggested that you apply some bass absorption in your room to mitigate any possible bass issues (see accessories).  Given your listening habits and large sized room, it is suggested to only pair high-sensitivity speakers with low-output amplifiers. All other combinations may suit your needs.' }}
         }
-        else if (state.systemAttributes.roomSize === 'large' && state.systemAttributes.outputValue === '2') {
+        else if (state.newSystem.userRoomSize === 'large' && state.newSystem.userListeningHabits === '2') {
             return {
                 newSystem: {
                     ...state.newSystem,
@@ -254,11 +271,11 @@ outputRecommendations = () => {
                     <option value='30' >30</option>
                 </select>
 
-                {this.state.dimensions.height === 1 || this.state.dimensions.width === 1 || this.state.dimensions.length === 1 ? <p>Please enter dimensions above to determine the 'acoustic size' of your room.</p> : <p>Your room is acoustically {this.state.systemAttributes.roomSize} in size. </p> }
+                {this.state.dimensions.height === 1 || this.state.dimensions.width === 1 || this.state.dimensions.length === 1 ? <p>Please enter dimensions above to determine the 'acoustic size' of your room.</p> : <p>Your room is acoustically {this.state.newSystem.userRoomSize} in size. </p> }
 
                 <h1>What volume levels do you tend to listen at?</h1>
 
-                <select onChange={(event) => this.handleIdealOutput(event)}>
+                <select onChange={(event) => this.handleUserListeningHabits(event)}>
                     <option value='0'>Please select an option below</option>
                     <option value='1'>I listen at mostly lower volumes (70-80db at the listening position)</option>
                     <option value='2'>It's important for me the system to play loudly and with wide dynamics(90db+ at the listening position)</option>
@@ -266,10 +283,10 @@ outputRecommendations = () => {
 
 
                 {
-                    this.state.systemAttributes.outputValue !== 0 && this.state.dimensions.height !== 1 && this.state.dimensions.width !== 1 && this.state.dimensions.length !== 1 ? <p>{this.state.newSystem.recommendations}</p> :<p>Please choose an answer from the dropdown above to recieve recommendations.</p>
+                    this.state.newSystem.userListeningHabits !== 0 && this.state.dimensions.height !== 1 && this.state.dimensions.width !== 1 && this.state.dimensions.length !== 1 ? <p>{this.state.newSystem.recommendations}</p> :<p>Please choose an answer from the dropdown above to recieve recommendations.</p>
                 }
 
-                <button onClick={this.goToChoose}>Choose Components</button>
+                <button onClick={this.goToChooseComponents}>Choose Components</button>
                 <button onClick={this.goToHome}>Cancel</button>
             
             </div>
