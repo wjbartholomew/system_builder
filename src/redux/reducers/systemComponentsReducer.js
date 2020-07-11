@@ -5,6 +5,8 @@ const systemComponents = (state = [], action) => {
         case 'DELETE_COMPONENT':
             const componentIndex = action.payload
             return state.filter(components => components !== state[componentIndex])
+        case 'RESET_SYSTEM_COMPONENTS':
+            return []
         default:
             return state;
     }

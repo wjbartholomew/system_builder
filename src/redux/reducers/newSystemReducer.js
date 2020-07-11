@@ -6,7 +6,8 @@ const newSystem = (state = {
         userListeningHabits: '',
         appropriateRoomSize: '',
         userRoomSize: '',
-        userID: ''
+        userId: '',
+        uniqueSystemId: ''
     }
         }, action) => {
     switch (action.type) {
@@ -18,6 +19,8 @@ const newSystem = (state = {
             return {newSystem: {...state.newSystem, userListeningHabits: action.payload}}
         case 'SET_APPROPRIATE_ROOM_SIZE':
             return {newSystem: {...state.newSystem, appropriateRoomSize: action.payload}}
+        case 'SET_USER_ID':
+            return { newSystem: { ...state.newSystem, userId: action.payload } }
         case 'RESET_NEW_SYSTEM':
             return {
                 newSystem: {
@@ -27,7 +30,8 @@ const newSystem = (state = {
                     userListeningHabits: '',
                     appropriateRoomSize: '',
                     userRoomSize: '',
-                    userID: ''
+                    userId: '',
+                    uniqueSystemId: ''
                 }
             }
         default:

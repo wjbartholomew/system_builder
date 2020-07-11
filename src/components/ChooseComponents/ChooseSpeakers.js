@@ -35,7 +35,7 @@ class ChooseSpeakers extends Component {
                 <div>
                     {this.props.state.availableComponents.map(item => {
 
-                        if (item.component_category_name === 'Speakers') {
+                        if (item.component_category === 3) {
 
                             return <div key={item.id} className="component">
                                 <p>Brand: {item.brand}</p>

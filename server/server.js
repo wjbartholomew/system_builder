@@ -12,7 +12,8 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const componentsRouter = require('./routes/components.router');
 const systemRouter = require('./routes/system.router');
-
+const existingSystemsRouter = require('./routes/existingSystems.router');
+const existingSystemComponentsRouter = require('./routes/existingSystemComponents.router');
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,8 +29,8 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/components', componentsRouter);
 app.use('/system', systemRouter);
-
-
+app.use('/existing', existingSystemsRouter);
+app.use('/existingcomponents', existingSystemComponentsRouter);
 // Serve static files
 app.use(express.static('build'));
 

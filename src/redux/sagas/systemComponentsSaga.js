@@ -12,9 +12,21 @@ function* addComponent(action) {
     }
 }
 
+function* saveSystemComponentsToDatabase(action){
+    console.log('save components to database')
+    console.log('action.payload',action.payload)
+    try {
+        yield axios.post(`/system/components`, action.payload)
+        yield put({ type: 'RESET_SYSTEM_COMPONENTS' })
+    } catch (error) {
+        console.log('SAVE SYSTEM POST FAILED', error)
+    }
+}
+
 
 function* systemComponentsSaga() {
     yield takeLatest('ADD_TO_SYSTEM_COMPONENTS', addComponent);
+    yield takeLatest('SAVE_SYSTEM_COMPONENTS_TO_DATABASE', saveSystemComponentsToDatabase);
 }
 
 export default systemComponentsSaga;

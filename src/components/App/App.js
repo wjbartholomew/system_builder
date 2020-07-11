@@ -27,6 +27,7 @@ import SelectCategory from '../SelectCategory/SelectCategory';
 import InsertCustom from '../InsertCustom/InsertCustom';
 import ExistingSystems from '../ExistingSystems/ExistingSystems';
 import SystemDetails from '../SystemDetails/SystemDetails';
+import ExistingSystemDetails from '../ExistingSystemDetails/ExistingSystemDetails';
 import AdminPage from '../AdminPage/AdminPage';
 
 import './App.css';
@@ -96,6 +97,11 @@ class App extends Component {
               exact
               path="/existing"
               component={ExistingSystems}
+            />
+            <Route
+              exact
+              path="/existingsystemdetails"
+              component={ExistingSystemDetails}
             />
             <Route
               exact

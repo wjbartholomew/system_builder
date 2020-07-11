@@ -21,12 +21,29 @@ class SelectCategory extends Component {
         this.props.history.push('/chooseaccessories')
     }
     goToExistingSystems = () => {
+
+        this.saveSystemComponents();
+
         this.props.history.push('/existing')
     }
 
-    saveSystem = () => {
+    saveSystemComponents = () => {
+        console.log('systemId:',this.props.state.newSystem.newSystem.uniqueSystemId)
+        console.log('userId', this.props.state.user.id)
+        this.props.state.systemComponents.map(item =>
+            this.props.dispatch({
+                type: 'SAVE_SYSTEM_COMPONENTS_TO_DATABASE',
+                payload: {componentId: item.id, systemId: this.props.state.newSystem.newSystem.uniqueSystemId, userId: this.props.state.user.id}
+            })
+        )
+
+        this.saveSystemDetails();
+    }
+
+    saveSystemDetails = () => {
         this.props.dispatch({
-            type: 'SAVE_SYSTEM_TO_DATABASE'
+            type: 'SAVE_SYSTEM_TO_DATABASE',
+            payload: this.props.state.newSystem.newSystem
         })
     }
 
@@ -121,18 +138,18 @@ class SelectCategory extends Component {
         let appropriateRoomSize = '';
 
         this.props.state.systemComponents.map(item => {
-            if(item.component_category_name === 'Amplification') {
+            if(item.component_category === 2) {
                 powerOutput = item.power_output
             }
         })
         this.props.state.systemComponents.map(item => {
-            if(item.component_category_name === 'Speakers'){
-            speakerSensitivity = item.Sensitivity
+            if(item.component_category === 3){
+            speakerSensitivity = item.sensitivity
             }
         })
 
         this.props.state.systemComponents.map(item => {
-            if (item.component_category_name === 'Speakers'){
+            if (item.component_category === 3){
             bassOutput = item.bass_output
             }
         })
@@ -206,25 +223,25 @@ class SelectCategory extends Component {
     potentialMismatches = () => {
         let userRoom  = this.props.state.newSystem.newSystem.userRoomSize;
         let userListeningHabits = this.props.state.newSystem.newSystem.userListeningHabits;
-        let potentialMismatches = '';
+        let potentialMismatches = 'None Detected';
         let powerOutput = '';
         let speakerSensitivity = '';
         let bassOutput = '';
         let appropriateRoomSize = '';
 
         this.props.state.systemComponents.map(item => {
-            if (item.component_category_name === 'Amplification') {
+            if (item.component_category === 2) {
                 powerOutput = item.power_output
             }
         })
         this.props.state.systemComponents.map(item => {
-            if (item.component_category_name === 'Speakers') {
-                speakerSensitivity = item.Sensitivity
+            if (item.component_category === 3) {
+                speakerSensitivity = item.sensitivity
             }
         })
 
         this.props.state.systemComponents.map(item => {
-            if (item.component_category_name === 'Speakers') {
+            if (item.component_category === 3) {
                 bassOutput = item.bass_output
             }
         })
@@ -285,10 +302,10 @@ class SelectCategory extends Component {
         else {
             appropriateRoomSize = 'Please choose amplification and speakers'
         }
-
+console.log('appropriateRoomSize', appropriateRoomSize)
         
         if (appropriateRoomSize.includes(userRoom) && userListeningHabits === '1'){
-            potentialMismatches = 'Everything looks good!'
+            potentialMismatches = 'Everything Looks Good!'
         }
         else if (userRoom === 'small') {
             potentialMismatches = 'That speaker may overload your room with bass'
@@ -297,13 +314,16 @@ class SelectCategory extends Component {
             potentialMismatches = 'That speaker will have a hard time providing "room filling" sound due to its low bass output in your large room.'
 
         }
-        else if (userRoom === 'large' && powerOutput === 'low') {
+        else if (userRoom === 'large' && powerOutput === 'low' && speakerSensitivity !== 'high') {
             potentialMismatches = 'You may want more power than the amplifier you chose can provide. Alternatively you could choose a high sensitivity speaker to pair with this amplifier. This component pairing may compromise maximum sound levels and dynamics'
 
         }
-        else if (userRoom === 'large' && powerOutput === 'medium' && userListeningHabits === '2') {
+        else if (userRoom === 'large' && powerOutput === 'medium' && userListeningHabits === '2' && speakerSensitivity !== 'high') {
             potentialMismatches = 'Given your desire to listen at loud level, it is recommended that you choose a more powerful amplifier or a high sensitivity speaker.'
 
+        }
+        else {
+            potentialMismatches = 'None Detected'
         }
 
 
@@ -315,11 +335,6 @@ class SelectCategory extends Component {
         console.log('potentialMismatches', potentialMismatches)
 
         return potentialMismatches
-
-        // this.props.dispatch({
-        //     type: 'SET_POTENTIAL_MISMATCHES',   
-        //     payload: potentialMismatches
-        // })
 
     }
 
@@ -335,7 +350,7 @@ class SelectCategory extends Component {
                     <h2>Source Components</h2>
                     <div>
                         {this.props.state.systemComponents.map((item,index) => {
-                            if(item.component_category_name === 'Source') {
+                            if(item.component_category === 1) {
                                return   <div key={index} className="component">
                                             <p>Brand: {item.brand}</p>
                                             <p>Name: {item.name}</p>
@@ -353,7 +368,7 @@ class SelectCategory extends Component {
                     <h2>Amplification</h2>
                     <div>
                         {this.props.state.systemComponents.map((item, index) => {
-                            if (item.component_category_name === 'Amplification') {
+                            if (item.component_category === 2) {
                                 return <div key={index} className="component">
                                     <p>Brand: {item.brand}</p>
                                     <p>Name: {item.name}</p>
@@ -370,7 +385,7 @@ class SelectCategory extends Component {
                     <h2>Speakers</h2>
                     <div>
                         {this.props.state.systemComponents.map((item, index) => {
-                            if (item.component_category_name === 'Speakers') {
+                            if (item.component_category === 3) {
                                 return <div key={index} className="component">
                                     <p>Brand: {item.brand}</p>
                                     <p>Name: {item.name}</p>
@@ -388,7 +403,7 @@ class SelectCategory extends Component {
                     <h2>Cables</h2>
                     <div>
                         {this.props.state.systemComponents.map((item, index) => {
-                            if (item.component_category_name === 'Cables') {
+                            if (item.component_category === 4) {
                                 return <div key={index} className="component">
                                     <p>Brand: {item.brand}</p>
                                     <p>Name: {item.name}</p>
@@ -406,7 +421,7 @@ class SelectCategory extends Component {
                     <h2>Accessories</h2>
                     <div>
                         {this.props.state.systemComponents.map((item, index) => {
-                            if (item.component_category_name === 'Accessories') {
+                            if (item.component_category === 5) {
                                 return <div key={index} className="component">
                                     <p>Brand: {item.brand}</p>
                                     <p>Name: {item.name}</p>

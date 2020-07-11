@@ -35,7 +35,7 @@ class ChooseSource extends Component {
                 <div> 
                     {this.props.state.availableComponents.map(item => {
 
-                        if(item.component_category_name === 'Source'){
+                        if(item.component_category === 1){
 
                         return  <div key={item.id} className="component">
                                     <p>Brand: {item.brand}</p>

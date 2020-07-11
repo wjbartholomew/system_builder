@@ -6,10 +6,13 @@ import React from 'react';
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 const AboutPage = () => (
+
   <div>
     <div>
       <p>
         Welcome to the Stereo System Builder. Choosing to create a new high-end home stereo system can be easy. The application will guide you to pick all the necessary components and alert you to any potential component mismatches. Just click below to start. 
+
+        <button>Build System</button>
       </p>
     </div>
   </div>

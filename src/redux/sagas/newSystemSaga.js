@@ -6,10 +6,10 @@ import axios from 'axios';
 function* saveSystemToDatabase(action) {
     console.log('save to database')
     try {
-        yield axios.post(`/system`, this.props.state.newSystem.newSystem)
+        yield axios.post(`/system`, action.payload)
         yield put({ type: 'RESET_NEW_SYSTEM' })
     } catch (error) {
-        console.log('POST FAILED', error)
+        console.log('SAVE SYSTEM POST FAILED', error)
     }
 }
 

@@ -5,7 +5,7 @@ import userSaga from './userSaga';
 import availableComponentsSaga from './availableComponentsSaga';
 import newSystemSaga from './newSystemSaga';
 import systemComponentsSaga from './systemComponentsSaga';
-
+import existingSystemsSaga from './existingSystemsSaga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -20,6 +20,7 @@ export default function* rootSaga() {
     userSaga(),
     availableComponentsSaga(),
     newSystemSaga(),
-    systemComponentsSaga()
+    systemComponentsSaga(),
+    existingSystemsSaga()
   ]);
 }

@@ -20,17 +20,42 @@ router.get('/:id', (req, res) => {
 
 
 
+
+
+
+
 /**
  * POST route template
  */
 router.post('/', (req, res) => {
     console.log('req.body',req.body)
     let query = `
-    INSERT INTO "Saved_System" 
-    ('user_id', 'name', 'description', 'recommendations', 'appropriate_room_size', 'potential_mismatches', 'most_expensive_components', 'source_type', 'listening_habits', 'system_price')
+    INSERT INTO "Saved_Systems" 
+    ("id","user_id", "name", "description", "recommendations",  "user_room", "listening_habits")
     VALUES 
-    ()`
+    ($1, $2, $3, $4, $5, $6, $7)`
+    pool.query(query, [req.body.uniqueSystemId, req.body.userId, req.body.name, req.body.description, req.body.recommendations, req.body.userRoomSize, req.body.userListeningHabits])
+    
+        .catch(error => {
+            console.log('ERROR STORING SYSTEM DETAILS', error);
+            res.sendStatus(500);
+        });
+});
 
+
+router.post('/components', (req, res) => {
+    console.log('req.body', req.body)
+    let query = `
+    INSERT INTO "System_Components" 
+    ("component_id", "system_id", "user_id")
+    VALUES 
+    ($1, $2, $3)`
+    pool.query(query, [req.body.componentId,req.body.systemId,req.body.userId])
+
+        .catch(error => {
+            console.log('ERROR STORING SYSTEM DETAILS', error);
+            res.sendStatus(500);
+        });
 });
 
 module.exports = router;

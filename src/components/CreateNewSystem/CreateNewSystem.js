@@ -25,7 +25,13 @@ class CreateNewSystem extends Component {
         }
     })
 
-
+componentDidMount() {
+   this.setState({
+       ...this.state,
+       newSystem: {uniqueSystemId: Math.floor((Math.random() * 1000) + 1),
+       userId: this.props.state.user.id}
+   }) 
+}
 
 
 calculateVolume = () => {
@@ -64,6 +70,7 @@ console.log('setting new system with this.state', this.state)
         type:'SET_NEW_SYSTEM',
         payload: this.state
     })
+
 
     this.props.history.push('/select')
 }
@@ -176,7 +183,7 @@ outputRecommendations = () => {
             return {
                 newSystem: {
                     ...state.newSystem,
-                recommendations: 'Based on the large size of your room it is suggested that you choose speakers with medium or high bass output to achieve a "room filling" sound. If speakers with high bass output are chosen it is suggested that you apply some bass absorption in your room to mitigate any possible bass issues (see accessories).  Given your listening habits and large sized room, it is suggested to only pair high-sensitivity speakers with low-output amplifiers and high-output amplifiers with low sensitivity speakers.' }}
+                    recommendations: 'Based on the large size of your room it is suggested that you choose speakers with medium or high bass output to achieve a "room filling" sound. If speakers with high bass output are chosen it is suggested that you apply some bass absorption in your room to mitigate any possible bass issues (see accessories).  Given your listening habits and large sized room, it is suggested to only pair low-output amplifiers with high-sensitivity speakers and low sensitivity speakers with high-output amplifiers.' }}
         }      
     })
 }

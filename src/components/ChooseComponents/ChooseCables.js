@@ -35,7 +35,7 @@ class ChooseCables extends Component {
                 <div>
                     {this.props.state.availableComponents.map(item => {
 
-                        if (item.component_category_name === 'Cables') {
+                        if (item.component_category === 4) {
 
                             return <div key={item.id} className="component">
                                 <p>Brand: {item.brand}</p>
