@@ -49,7 +49,7 @@ class ExistingSystems extends Component {
                 <h1>Existing Systems:</h1>
                 {this.props.state.existingSystems.map(details => {
                     let price = 0;
-                return <div key={details.system_id} className="systemDiv">
+                return <div key={details.id} className="systemDiv">
                     <h2>{details.name}</h2>
                     Description: {details.description}
                     <br></br>
