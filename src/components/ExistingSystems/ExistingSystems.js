@@ -4,10 +4,18 @@ import './existingSystems.css'
 
 class ExistingSystems extends Component {
 
-    componentWillMount(){
+    // constructor(props){
+    //     super(props);
+    //     this.getExistingSystems();
+    //     this.getExistingComponents();
+        
+    // }
+
+
+
+    componentDidMount() {
         this.getExistingSystems();
         this.getExistingComponents();
-        
     }
     
     getExistingSystems = () => {

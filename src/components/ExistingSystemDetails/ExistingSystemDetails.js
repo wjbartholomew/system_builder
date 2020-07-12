@@ -447,7 +447,7 @@ systemName = () => {
 
 
 
-                <button>Delete System</button> <button>Edit System</button>
+                <button onClick={this.deleteSystem}>Delete System</button> <button>Edit System</button>
             </div> 
         );
     }

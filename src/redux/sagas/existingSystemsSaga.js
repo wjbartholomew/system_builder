@@ -22,11 +22,22 @@ function* getExistingComponents() {
     }
 }
 
+function* deleteSystem(action) {
+    console.log('In deleteSystem');
+    try {
+        yield axios.delete(`/existing/${action.payload}`)
+        yield put({ type: 'GET_EXISTING_SYSTEMS' })
+    } catch (error) {
+        console.log('DELETE SYSTEM FAILED:', error)
+    }
+}
+
 
 function* existingSystemsSaga() {
 
     yield takeLatest('GET_EXISTING_SYSTEMS', getExistingSystems);
     yield takeLatest('GET_EXISTING_SYSTEM_COMPONENTS', getExistingComponents);
+    yield takeLatest('DELETE_SYSTEM', deleteSystem);
 }
 
 export default existingSystemsSaga;

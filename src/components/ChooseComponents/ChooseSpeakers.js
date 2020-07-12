@@ -38,8 +38,11 @@ class ChooseSpeakers extends Component {
                         if (item.component_category === 3) {
 
                             return <div key={item.id} className="component">
-                                <p>Brand: {item.brand}</p>
-                                <p>Name: {item.name}</p>
+                                <h3>{item.brand} {item.name}</h3>
+                                <p>Description: {item.description}</p>
+                                <p>Sensitivity: {item.sensitivity}</p>
+                                <p>Bass Output: {item.bass_output}</p>
+                                <p>Price: ${item.price}</p>
                                 <img src={item.image} alt={item.name}></img>
                                 <button value={item.id} onClick={(event) => this.addComponent(event)}>Insert Component</button>
                             </div>
@@ -52,7 +55,7 @@ class ChooseSpeakers extends Component {
                 </div>
 
                 <div className="component">
-                    <p>Insert Custom Component</p>
+                    <h3>Insert Custom Component</h3>
                     <button onClick={this.goToInsert}>Insert Component</button>
                 </div>
 

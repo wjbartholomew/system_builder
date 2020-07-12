@@ -1,0 +1,41 @@
+.input {
+    margin: 10px;
+    width: 500px;
+    border-radius: 5px;
+}
+
+.input1 {
+    margin: 10px;
+    width: 800px;
+    border-radius: 5px;
+}
+
+label {
+    margin-left: 75px;
+}
+
+.p {
+    margin-left: 50px;
+}
+
+select {
+    margin: 20px;;
+    border-radius: 5px;
+}
+
+.question1 {
+    margin-left: 50px;
+}
+
+.createPageButtons {
+    text-align: center;
+}
+
+.createNewSystemTitle {
+    margin: 40px;
+}
+
+.selectUserListeningHabits {
+    margin-left: 75px;
+}
+

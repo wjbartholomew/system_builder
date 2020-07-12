@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './SelectCategory.css'
 
 
 class SelectCategory extends Component {
@@ -22,7 +23,7 @@ class SelectCategory extends Component {
     }
     goToExistingSystems = () => {
 
-        this.saveSystemComponents();
+        this.saveSystemComponents()
 
         this.props.history.push('/existing')
     }
@@ -351,9 +352,11 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     <div>
                         {this.props.state.systemComponents.map((item,index) => {
                             if(item.component_category === 1) {
-                               return   <div key={index} className="component">
-                                            <p>Brand: {item.brand}</p>
-                                            <p>Name: {item.name}</p>
+                                return <div key={index} className="selectedComponent">
+                                            <h3>{item.brand} {item.name}</h3>
+                                            <p>Description: {item.description}</p>
+                                            <p>Source Type: {item.source_type}</p>
+                                            <p>Price: ${item.price}</p>
                                             <img src={item.image} alt={item.name}></img>
                                             <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
                                         </div>
@@ -364,14 +367,17 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     </div>
                     <button onClick={this.goToSource}>Add Component</button>
                 </div>
-                <div>
+                <div className="category">
                     <h2>Amplification</h2>
                     <div>
                         {this.props.state.systemComponents.map((item, index) => {
                             if (item.component_category === 2) {
-                                return <div key={index} className="component">
-                                    <p>Brand: {item.brand}</p>
-                                    <p>Name: {item.name}</p>
+                                return <div key={index} className="selectedComponent">
+                                    <h3>{item.brand} {item.name}</h3>
+                                    <p>Description: {item.description} </p>
+                                    <p>Power Output: {item.power_output}</p>
+                                    <p>Heat Output: {item.heat_output}</p>
+                                    <p>Price: ${item.price}</p>
                                     <img src={item.image} alt={item.name}></img>
                                     <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
                                 </div>
@@ -381,14 +387,17 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     </div>
                     <button onClick={this.goToAmplification}>Add Component</button>
                 </div>
-                <div>
+                <div className="category">
                     <h2>Speakers</h2>
                     <div>
                         {this.props.state.systemComponents.map((item, index) => {
                             if (item.component_category === 3) {
-                                return <div key={index} className="component">
-                                    <p>Brand: {item.brand}</p>
-                                    <p>Name: {item.name}</p>
+                                return <div key={index} className="selectedComponent">
+                                    <h3>{item.brand} {item.name}</h3>
+                                    <p>Description: {item.description}</p>
+                                    <p>Sensitivity: {item.sensitivity}</p>
+                                    <p>Bass Output: {item.bass_output}</p>
+                                    <p>Price: ${item.price}</p>
                                     <img src={item.image} alt={item.name}></img>
                                     <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
                                 </div>
@@ -399,14 +408,15 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     </div>
                     <button onClick={this.goToSpeakers}>Add Component</button>
                 </div>
-                <div>
+                <div className="category">
                     <h2>Cables</h2>
                     <div>
                         {this.props.state.systemComponents.map((item, index) => {
                             if (item.component_category === 4) {
-                                return <div key={index} className="component">
-                                    <p>Brand: {item.brand}</p>
-                                    <p>Name: {item.name}</p>
+                                return <div key={index} className="selectedComponent">
+                                    <h3>{item.brand} {item.name}</h3>
+                                    <p>Description: {item.description}</p>
+                                    <p>Price: ${item.price}</p>
                                     <img src={item.image} alt={item.name}></img>
                                     <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
                                 </div>
@@ -417,14 +427,15 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     </div>
                     <button onClick={this.goToCables}>Add Component</button>
                 </div>
-                <div>
+                <div className="category">
                     <h2>Accessories</h2>
                     <div>
                         {this.props.state.systemComponents.map((item, index) => {
                             if (item.component_category === 5) {
-                                return <div key={index} className="component">
-                                    <p>Brand: {item.brand}</p>
-                                    <p>Name: {item.name}</p>
+                                return <div key={index} className="selectedComponent">
+                                    <h3>{item.brand} {item.name}</h3>
+                                    <p>Description: {item.description}</p>
+                                    <p>Price: ${item.price}</p>
                                     <img src={item.image} alt={item.name}></img>
                                     <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
                                 </div>
@@ -436,7 +447,7 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     <button onClick={this.goToAccessories}>Add Component</button>
                 </div>
 
-                <div>
+                <div className="category">
                     <h2>System Information</h2>
                     <h3>System Name: {this.props.state.newSystem.newSystem.name}</h3>
                     <p>Description: {this.props.state.newSystem.newSystem.description}</p>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './CreateNewSystem.css'
 
 class CreateNewSystem extends Component {
 
@@ -120,31 +121,10 @@ handleUserListeningHabits = (event) => {
             userListeningHabits: event.target.value
         }
     })
-
-    // this.props.dispatch({
-    //     type: 'SET_USER_LISTENING_HABITS',
-    //     payload: event.target.value
-    // })
-
    
     this.outputRecommendations();
 
 }
-
-// setIdealOutput = () => {
-
-//     this.setState((state) => {
-//         console.log('in set ideal output, outputValue:', state.newSystem.outputValue)
-//         if(state.newSystem.outputValue === 1){
-//             return {newSystem: { ...state.newSystem, idealOutput: 'low' }}
-//         }
-//         else if(state.newSystem.outputValue === 2) {
-//                 return { newSystem: { ...state.newSystem, idealOutput: 'high' } }
-//             }
-        
-//     })
-//     this.outputRecommendations();
-// }
 
 
 outputRecommendations = () => {
@@ -194,17 +174,21 @@ outputRecommendations = () => {
     render() {
         return (
             <div>
-                <h1>Create New System:</h1>
+                <h1 className="createNewSystemTitle">Create New System:</h1>
 
                 <label>System Name:</label>
-                <input onChange={(event) => this.handleChange(event, 'name')}></input>
+                <input className="input" onChange={(event) => this.handleChange(event, 'name')}></input>
 
+                <br></br>
                 <label>Description:</label>
-                <input onChange={(event) => this.handleChange(event, 'description')}></input>
+                <input className="input1" onChange={(event) => this.handleChange(event, 'description')}></input>
 
-                <h1>Recommendations:</h1>
+                <h2>Recommendations:</h2>
+                <br></br>
+               
+                <h3 className="question1">What size is your listening room?</h3>
 
-                <p>What size is your listening room?</p>
+                <br></br>
                
                 <label>Height:</label> 
 
@@ -221,6 +205,8 @@ outputRecommendations = () => {
                     <option value='15' >15</option>
                     <option value='16' >16</option>
                 </select>
+
+                <br></br>
 
                 <label>Width:</label> 
                 <select onChange={(event) => this.handleDimensions(event, 'width')}>
@@ -250,6 +236,8 @@ outputRecommendations = () => {
                     <option value='30' >30</option>
                 </select>
                 
+                <br></br>
+
                 <label>Length:</label> 
                 <select onChange={(event) => this.handleDimensions(event, 'length')}>
                     <option value='0' >Please select a measurement below</option>
@@ -278,11 +266,14 @@ outputRecommendations = () => {
                     <option value='30' >30</option>
                 </select>
 
-                {this.state.dimensions.height === 1 || this.state.dimensions.width === 1 || this.state.dimensions.length === 1 ? <p>Please enter dimensions above to determine the 'acoustic size' of your room.</p> : <p>Your room is acoustically {this.state.newSystem.userRoomSize} in size. </p> }
+                <br></br>
 
-                <h1>What volume levels do you tend to listen at?</h1>
-
-                <select onChange={(event) => this.handleUserListeningHabits(event)}>
+                {this.state.dimensions.height === 1 || this.state.dimensions.width === 1 || this.state.dimensions.length === 1 ? <p className="p">Please enter dimensions above to determine the 'acoustic size' of your room.</p> : <p className="p">Your room is acoustically '{this.state.newSystem.userRoomSize}' in size. </p> }
+                <br></br>
+                <br></br>
+                <h3 className="question1">What volume levels do you tend to listen at?</h3>
+                
+                <select className ="selectUserListeningHabits" onChange={(event) => this.handleUserListeningHabits(event)}>
                     <option value='0'>Please select an option below</option>
                     <option value='1'>I listen at mostly lower volumes (70-80db at the listening position)</option>
                     <option value='2'>It's important for me the system to play loudly and with wide dynamics(90db+ at the listening position)</option>
@@ -290,12 +281,14 @@ outputRecommendations = () => {
 
 
                 {
-                    this.state.newSystem.userListeningHabits !== 0 && this.state.dimensions.height !== 1 && this.state.dimensions.width !== 1 && this.state.dimensions.length !== 1 ? <p>{this.state.newSystem.recommendations}</p> :<p>Please choose an answer from the dropdown above to recieve recommendations.</p>
+                    this.state.newSystem.userListeningHabits && this.state.dimensions.height !== 1 && this.state.dimensions.width !== 1 && this.state.dimensions.length !== 1 ? <p className="p">{this.state.newSystem.recommendations}</p> : <p className="p">Please choose an answer from the dropdown above to recieve recommendations.</p>
                 }
-
+                <br></br>
+                <br></br>
+<div className="createPageButtons">
                 <button onClick={this.goToChooseComponents}>Choose Components</button>
                 <button onClick={this.goToHome}>Cancel</button>
-            
+                </div>
             </div>
         );
     }

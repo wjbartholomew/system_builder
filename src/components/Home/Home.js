@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './Home.css'
 
 class Home extends Component {
 
@@ -25,7 +26,7 @@ goToExisting = () => {
                 <button onClick={this.goToCreate}>Get Started!</button>
                 <button onClick={this.goToAbout}>About</button>
             </div>
-            <div>
+            <div className="Create">
                 <p>View Existing Systems</p>
                 <button onClick={this.goToExisting}>View Existing</button>
             </div>

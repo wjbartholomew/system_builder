@@ -1,0 +1,27 @@
+.Create {
+    border: black;
+    border-style: solid;
+    border-radius: 15px;
+    width: 400px;
+    margin: 50px;
+    text-align: center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #00acb0;
+    color: white;
+}
+
+button:hover {
+  background-color: white;
+  color: #00acb0;
+}

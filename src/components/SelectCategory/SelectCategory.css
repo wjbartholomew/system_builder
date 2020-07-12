@@ -1,21 +1,20 @@
+.category {
+    border-style: solid;
+    border-radius: 15px;
+    margin: 25px;
+    padding: 10px;
+    background-color: darkcyan;
+}
 
-
-.component {
+.selectedComponent {
     height: 425px;
     width: 280px;
     display: inline-block;
-    background-color: darkcyan;
+    background-color: white;
     margin: 10px;
     border-style: solid;
     border-radius: 10px;
     justify-content: center;
     padding: 10px;
     
-}
-
- img {
-    border: black;
-    border-radius: 5px;
-    height: 115px;
-    width: auto;
 }
