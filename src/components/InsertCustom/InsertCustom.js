@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import './InsertCustom.css'
 
 class InsertCustom extends Component {
 
@@ -84,15 +85,15 @@ class InsertCustom extends Component {
             <div>
                 <h2>Insert Custom Component</h2>
              
-                    <label>Brand:</label><input type="text" onChange={(event) => this.handleChange(event, 'brand')}></input> 
+                    <label>Brand:</label><input className="input" type="text" onChange={(event) => this.handleChange(event, 'brand')}></input> 
                 <br/>
-                    <label>Name:</label><input type="text" onChange={(event) => this.handleChange(event, 'componentName')}></input>
+                <label>Name:</label><input className="input" type="text" onChange={(event) => this.handleChange(event, 'componentName')}></input>
                 <br />
-                    <label>Description:</label><input type="text" onChange={(event) => this.handleChange(event, 'description')}></input>
+                <label>Description:</label><input className="input" type="text" onChange={(event) => this.handleChange(event, 'description')}></input>
                 <br />
-                    <label>Image URL:</label><input type="text" onChange={(event) => this.handleChange(event, 'imageUrl')}></input>
+                <label>Image URL:</label><input className="input" type="text" onChange={(event) => this.handleChange(event, 'imageUrl')}></input>
                 <br />
-                    <label>Price:</label><input type="text" onChange={(event) => this.handleChange(event, 'price')}></input>
+                <label>Price:</label><input className="input" type="text" onChange={(event) => this.handleChange(event, 'price')}></input>
                 <br />
 
                 <label>Component Category:</label><select onChange={(event) => this.handleChange(event, 'componentCategory')}>
@@ -104,13 +105,13 @@ class InsertCustom extends Component {
                     <option value='4' >Cables</option>
                     <option value='5' >Accessories</option>
                 </select>
-                <h3>For Sources:</h3>
+                <h3 className="categories" >For Sources:</h3>
                 <label>Source Type:</label><select onChange={(event) => this.handleChange(event, 'sourceType')}>
                     <option>Please select a type below</option>
                     <option value='analog' >Analog</option>
                     <option value='digital' >Digital</option>
                 </select>
-                <h3>For Speakers:</h3>
+                <h3 className="categories" >For Speakers:</h3>
                 <label>Sensitivity:</label><select onChange={(event) => this.handleChange(event, 'sensitivity')}>
                     <option>Please select a sensitivity below</option>
                     <option value='low' >Low</option>
@@ -123,7 +124,7 @@ class InsertCustom extends Component {
                     <option value='medium' >Medium</option>
                     <option value='high' >High</option>
                 </select>
-                <h3>For Amplifiers:</h3>
+                <h3 className="categories" >For Amplifiers:</h3>
                 <label>Power Output:</label><select onChange={(event) => this.handleChange(event, 'powerOutput')}>
                     <option>Please select an output below</option>
                     <option value='low' >Low</option>
@@ -137,7 +138,7 @@ class InsertCustom extends Component {
                     <option value='high' >High</option>
                 </select>
                 
-                <div>
+                <div className="insertCustomButtons">
                     <button onClick={this.addComponent}>Save Component</button> <button onClick={this.goBack}>Go Back</button>
                 </div>
             </div>

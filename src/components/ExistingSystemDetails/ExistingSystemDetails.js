@@ -347,8 +347,10 @@ systemName = () => {
     render() {
         return (
             <div>
+                
                 <h1>System Details:</h1>
-                Source(s):
+                <div className="category">
+                    <h3>Source(s):</h3>
                 <br></br>
                 {this.props.state.existingSystemComponents.map(item => {
                     if (item.system_id == this.props.state.systemToView && item.component_category === 1){
@@ -363,8 +365,10 @@ systemName = () => {
                             </div>
                     }
                 })}
+                </div>
 <br></br>
-                Amplification:
+                <div className="category">
+                    <h3>Amplification:</h3>
                 <br></br>
                 {this.props.state.existingSystemComponents.map(item => {
                     if (item.system_id == this.props.state.systemToView && item.component_category === 2) {
@@ -380,8 +384,10 @@ systemName = () => {
                         </div>
                     }
                 })}
+                </div>
                 <br></br>
-                Speakers:
+                <div className="category">
+                    <h3>Speakers:</h3>
                 <br></br>
                 {this.props.state.existingSystemComponents.map(item => {
                     if (item.system_id == this.props.state.systemToView && item.component_category === 3) {
@@ -397,8 +403,11 @@ systemName = () => {
                         </div>
                     }
                 })}
+                </div>
                 <br></br>
-                Cables:
+                <div className="category">
+                    <h3>Cables:</h3>
+                
                 <br></br>
                 {this.props.state.existingSystemComponents.map(item => {
                     if (item.system_id == this.props.state.systemToView && item.component_category === 4) {
@@ -412,8 +421,10 @@ systemName = () => {
                         </div>
                     }
                 })}
+                </div>
                 <br></br>
-                Accessories:
+                <div className="category">
+                    <h3> Accessories:</h3>
                 <br></br>
                 {this.props.state.existingSystemComponents.map(item => {
                     if (item.system_id == this.props.state.systemToView && item.component_category === 5) {
@@ -427,12 +438,13 @@ systemName = () => {
                         </div>
                     }
                 })}
+                </div>
                 <br></br>
                 <br></br>
 
 
 
-                <div>
+                <div className="systemInfo">
                     <h2>System Information</h2>
                     <h3>System Name: {this.systemName()}</h3>
                     <p>Description: {this.systemDescription()}</p>
@@ -442,12 +454,16 @@ systemName = () => {
                     <p>Appropriate for a room of size: {this.appropriateRoomSize()}</p>
                     <p>Analog/digital: {this.sourceType()}</p>
                     <p>Potential Component Mismatches: {this.potentialMismatches()}</p>
+                <br></br>
+                <br></br>
+                <div className="existingSystemDetailsButtons">
+                    <button onClick={this.deleteSystem}>Delete System</button> <button>Edit System</button>
+                    </div>
                 </div>
 
 
 
 
-                <button onClick={this.deleteSystem}>Delete System</button> <button>Edit System</button>
             </div> 
         );
     }

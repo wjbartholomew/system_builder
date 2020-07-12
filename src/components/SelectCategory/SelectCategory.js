@@ -369,6 +369,8 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                         <button  onClick={this.goToSource}>Add Component</button>
                     </div>
                 </div>
+                <br></br>
+                <br></br>
                 <div className="category">
                     <h2>Amplification</h2>
                     <div>
@@ -390,6 +392,9 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     <div className="selectButton">
                         <button onClick={this.goToAmplification}>Add Component</button>
                     </div>                </div>
+
+                <br></br>
+                <br></br>
                 <div className="category">
                     <h2>Speakers</h2>
                     <div>
@@ -412,6 +417,9 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     <div className="selectButton">
                         <button onClick={this.goToSpeakers}>Add Component</button>
                     </div>                </div>
+
+                <br></br>
+                <br></br>
                 <div className="category">
                     <h2>Cables</h2>
                     <div>
@@ -432,6 +440,9 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     <div className="selectButton">
                         <button onClick={this.goToCables}>Add Component</button>
                     </div>                </div>
+
+                <br></br>
+                <br></br>
                 <div className="category">
                     <h2>Accessories</h2>
                     <div>
@@ -453,7 +464,8 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                         <button onClick={this.goToAccessories}>Add Component</button>
                     </div>                
                     </div>
-
+                <br></br>
+                <br></br>
                 <div className="systemInfo">
                     <h2>System Information</h2>
                     <h3>System Name: {this.props.state.newSystem.newSystem.name}</h3>
@@ -466,8 +478,10 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     <p>Potential Component Mismatches: {this.potentialMismatches()}</p>
                     <br></br>
                     <br></br>
+                    <div className="selectCategoryButtons">
                     <button onClick={this.goToExistingSystems}>Save System</button>
                     <button onClick={this.goToChoose}>Delete System</button>
+                    </div>
                 </div>
                 <div>
                     

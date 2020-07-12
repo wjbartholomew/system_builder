@@ -11,18 +11,35 @@ class ExistingSystems extends Component {
         
     // }
 
+    state = {
+        existingSystems: [],
+        existingSystemComponents: []
+    }
+
 
 
     componentDidMount() {
         this.getExistingSystems();
         this.getExistingComponents();
+        
     }
     
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            existingSystems:nextProps.state.existingSystems
+        });
+        console.log('nextProps', nextProps.state.existingSystems);
+        console.log(this.state.existingSystems)
+        this.forceUpdate();
+    }
+
+
+
     getExistingSystems = () => {
         this.props.dispatch({
         type: 'GET_EXISTING_SYSTEMS',
         })
-
+        
         
     }
 
@@ -30,6 +47,7 @@ class ExistingSystems extends Component {
         this.props.dispatch({
             type: 'GET_EXISTING_SYSTEM_COMPONENTS'
         })
+        
     }
 
     goToSystemDetails = (event) => {

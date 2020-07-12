@@ -43,19 +43,50 @@ router.post('/', (req, res) => {
 });
 
 
-router.post('/components', (req, res) => {
-    console.log('req.body', req.body)
-    let query = `
+router.post('/components', async (req, res) => {
+
+    const connection = await pool.connect();
+    try {
+        await connection.query('BEGIN');
+        const query = `
     INSERT INTO "System_Components" 
     ("component_id", "system_id", "user_id")
     VALUES 
     ($1, $2, $3)`
-    pool.query(query, [req.body.componentId,req.body.systemId,req.body.userId])
+        const result = await connection.query(query, [req.body.componentId, req.body.systemId, req.body.userId])
+        await connection.query('COMMIT');
+        res.sendStatus(200);
 
-        .catch(error => {
-            console.log('ERROR STORING SYSTEM DETAILS', error);
-            res.sendStatus(500);
-        });
-});
+    }catch (error){
+        await connection.query('ROLLBACK');
+        res.sendStatus(500);
+    }
+    finally {
+        connection.release()
+    }
+
+})
+
+
+
+
+
+
+
+
+
+    // console.log('req.body', req.body)
+    // let query = `
+    // INSERT INTO "System_Components" 
+    // ("component_id", "system_id", "user_id")
+    // VALUES 
+    // ($1, $2, $3)`
+    // pool.query(query, [req.body.componentId,req.body.systemId,req.body.userId])
+
+    //     .catch(error => {
+    //         console.log('ERROR STORING SYSTEM DETAILS', error);
+    //         res.sendStatus(500);
+    //     });
+// });
 
 module.exports = router;
