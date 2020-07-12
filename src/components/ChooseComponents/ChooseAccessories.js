@@ -18,6 +18,10 @@ class ChooseAccessories extends Component {
         this.props.history.push('/insert');
     }
 
+    goBack = () => {
+        this.props.history.push('/select')
+    }
+
     addComponent = (event) => {
         console.log('in addComponent to system')
         console.log('event value for adding component', event.target.value)
@@ -38,12 +42,14 @@ class ChooseAccessories extends Component {
                         if (item.component_category === 5) {
 
                             return <div key={item.id} className="component">
-                                <h3>{item.brand} {item.name}</h3>
-                                <p>Description: {item.description}</p>
-                                <p>Price: ${item.price}</p>
-                                <img src={item.image} alt={item.name}></img>
-                                <button value={item.id} onClick={(event) => this.addComponent(event)}>Insert Component</button>
-                            </div>
+                                <div>
+                                        <h3>{item.brand} {item.name}</h3>
+                                        <p>Description: {item.description}</p>
+                                        <p>Price: ${item.price}</p>
+                                        <img src={item.image} alt={item.name}></img>
+                                        <button value={item.id} onClick={(event) => this.addComponent(event)}>Insert Component</button>
+                                   </div>
+                                    </div>
                         }
                         else {
                             return null
@@ -56,7 +62,9 @@ class ChooseAccessories extends Component {
                     <h3>Insert Custom Component</h3>
                     <button onClick={this.goToInsert}>Insert Component</button>
                 </div>
-
+                <div className="chooseComponentsButton">
+                        <button onClick={this.goBack} >Go Back</button>
+                    </div>
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ChooseComponent.css'
 
+
 class ChooseSpeakers extends Component {
 
     componentDidMount() {
@@ -16,6 +17,10 @@ class ChooseSpeakers extends Component {
 
     goToInsert = () => {
         this.props.history.push('/insert');
+    }
+
+    goBack = () => {
+        this.props.history.push('/select')
     }
 
     addComponent = (event) => {
@@ -38,6 +43,7 @@ class ChooseSpeakers extends Component {
                         if (item.component_category === 3) {
 
                             return <div key={item.id} className="component">
+                                <div>
                                 <h3>{item.brand} {item.name}</h3>
                                 <p>Description: {item.description}</p>
                                 <p>Sensitivity: {item.sensitivity}</p>
@@ -45,6 +51,7 @@ class ChooseSpeakers extends Component {
                                 <p>Price: ${item.price}</p>
                                 <img src={item.image} alt={item.name}></img>
                                 <button value={item.id} onClick={(event) => this.addComponent(event)}>Insert Component</button>
+                            </div>
                             </div>
                         }
                         else {
@@ -57,6 +64,10 @@ class ChooseSpeakers extends Component {
                 <div className="component">
                     <h3>Insert Custom Component</h3>
                     <button onClick={this.goToInsert}>Insert Component</button>
+                </div>
+
+                <div className="chooseComponentsButton">
+                    <button onClick={this.goBack} >Go Back</button>
                 </div>
 
             </div>

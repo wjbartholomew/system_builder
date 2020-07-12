@@ -353,12 +353,14 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                         {this.props.state.systemComponents.map((item,index) => {
                             if(item.component_category === 1) {
                                 return <div key={index} className="selectedComponent">
+                                    <div>
                                             <h3>{item.brand} {item.name}</h3>
                                             <p>Description: {item.description}</p>
                                             <p>Source Type: {item.source_type}</p>
                                             <p>Price: ${item.price}</p>
                                             <img src={item.image} alt={item.name}></img>
-                                            <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
+                                            <button className="selecedComponentButton" value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
+                                        </div>
                                         </div>
                             }
                         }
@@ -377,6 +379,7 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                         {this.props.state.systemComponents.map((item, index) => {
                             if (item.component_category === 2) {
                                 return <div key={index} className="selectedComponent">
+                                    <div>
                                     <h3>{item.brand} {item.name}</h3>
                                     <p>Description: {item.description} </p>
                                     <p>Power Output: {item.power_output}</p>
@@ -384,6 +387,7 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                                     <p>Price: ${item.price}</p>
                                     <img src={item.image} alt={item.name}></img>
                                     <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
+                                </div>
                                 </div>
                             }
                         }
@@ -401,6 +405,7 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                         {this.props.state.systemComponents.map((item, index) => {
                             if (item.component_category === 3) {
                                 return <div key={index} className="selectedComponent">
+                                    <div>
                                     <h3>{item.brand} {item.name}</h3>
                                     <p>Description: {item.description}</p>
                                     <p>Sensitivity: {item.sensitivity}</p>
@@ -408,6 +413,7 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                                     <p>Price: ${item.price}</p>
                                     <img src={item.image} alt={item.name}></img>
                                     <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
+                                </div>
                                 </div>
                             }
                         }
@@ -426,11 +432,13 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                         {this.props.state.systemComponents.map((item, index) => {
                             if (item.component_category === 4) {
                                 return <div key={index} className="selectedComponent">
+                                    <div>
                                     <h3>{item.brand} {item.name}</h3>
                                     <p>Description: {item.description}</p>
                                     <p>Price: ${item.price}</p>
                                     <img src={item.image} alt={item.name}></img>
                                     <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
+                                </div>
                                 </div>
                             }
                         }
@@ -449,11 +457,13 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                         {this.props.state.systemComponents.map((item, index) => {
                             if (item.component_category === 5) {
                                 return <div key={index} className="selectedComponent">
+                                    <div>
                                     <h3>{item.brand} {item.name}</h3>
                                     <p>Description: {item.description}</p>
                                     <p>Price: ${item.price}</p>
                                     <img src={item.image} alt={item.name}></img>
                                     <button value={index} onClick={(event) => this.deleteComponent(event)}>Delete Component</button>
+                                </div>
                                 </div>
                             }
                         }
@@ -476,8 +486,7 @@ console.log('appropriateRoomSize', appropriateRoomSize)
                     <p>Appropriate for a room of size: {this.appropriateRoomSize()}</p>
                     <p>Analog/digital: {this.sourceType()}</p>
                     <p>Potential Component Mismatches: {this.potentialMismatches()}</p>
-                    <br></br>
-                    <br></br>
+                    
                     <div className="selectCategoryButtons">
                     <button onClick={this.goToExistingSystems}>Save System</button>
                     <button onClick={this.goToChoose}>Delete System</button>

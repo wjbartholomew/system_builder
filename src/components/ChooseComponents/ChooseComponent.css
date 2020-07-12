@@ -1,9 +1,11 @@
-
+/* .body {
+    display: inline-grid;
+} */
 
 .component {
     height: 425px;
     width: 280px;
-    display: inline-block;
+    display: inline-grid;
     background-color: darkcyan;
     margin: 10px;
     border-style: solid;
@@ -19,4 +21,8 @@
     height: 115px;
     width: auto;
     padding: 0px;
+}
+
+.chooseComponentsButton {
+    text-align: center;
 }

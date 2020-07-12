@@ -18,15 +18,19 @@
 }
 
 .selectedComponent {
-    height: 400px;
+    height: 425px;
     width: 280px;
-    display: inline-block;
+    display: inline-grid;
     background-color: rgba(255,255,255,.6);
     margin: 10px;
     border-style: solid;
     border-radius: 10px;
     justify-content: center;
     padding: 10px;
+}
+
+.selectedComponentButton {
+    text-align: center;
 }
 
 .selectButton {
