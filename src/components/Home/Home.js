@@ -22,12 +22,12 @@ goToExisting = () => {
         return (
             <>
             <div className="Create">
-                <p>Create New System</p>
+                <h3>Create New System</h3>
                 <button onClick={this.goToCreate}>Get Started!</button>
                 <button onClick={this.goToAbout}>About</button>
             </div>
             <div className="Create">
-                <p>View Existing Systems</p>
+                <h3>View Existing Systems</h3>
                 <button onClick={this.goToExisting}>View Existing</button>
             </div>
              

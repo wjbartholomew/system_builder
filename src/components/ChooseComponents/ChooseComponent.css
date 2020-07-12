@@ -14,8 +14,9 @@
 }
 
  img {
-    border: black;
+    border-style: solid;
     border-radius: 5px;
     height: 115px;
     width: auto;
+    padding: 0px;
 }
