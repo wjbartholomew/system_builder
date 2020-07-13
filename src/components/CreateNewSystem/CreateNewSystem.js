@@ -111,6 +111,15 @@ handleDimensions = (event, type) => {
     
 }
 
+populate = () => {
+    this.setState({
+        newSystem: {
+            name: 'Made in Minnesota!',
+            description: 'Premium stereo with all Minnesota made components.'
+        }
+    })
+}
+
 
 handleUserListeningHabits = (event) => {
 
@@ -177,13 +186,13 @@ outputRecommendations = () => {
                 <h1 className="createNewSystemTitle">Create New System:</h1>
 
                 <label>System Name:</label>
-                <input className="input" onChange={(event) => this.handleChange(event, 'name')}></input>
+                <input className="input" value={this.state.newSystem.name} onChange={(event) => this.handleChange(event, 'name')}></input>
 
                 <br></br>
                 <label>Description:</label>
-                <input className="input1" onChange={(event) => this.handleChange(event, 'description')}></input>
+                <input className="input1" value={this.state.newSystem.description} onChange={(event) => this.handleChange(event, 'description')}></input>
 
-                <h2>Recommendations:</h2>
+                <h2 onClick={this.populate}>Recommendations:</h2>
                 <br></br>
                
                 <h3 className="question1">What size is your listening room?</h3>

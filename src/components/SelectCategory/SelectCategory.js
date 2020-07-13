@@ -308,8 +308,8 @@ console.log('appropriateRoomSize', appropriateRoomSize)
         if (appropriateRoomSize.includes(userRoom) && userListeningHabits === '1'){
             potentialMismatches = 'Everything Looks Good!'
         }
-        else if (userRoom === 'small') {
-            potentialMismatches = 'That speaker may overload your room with bass'
+        else if (userRoom === 'small' && bassOutput === 'high') {
+            potentialMismatches = 'That speaker may overload your small room with bass'
         }
         else if (userRoom === 'large' && bassOutput === 'low') {
             potentialMismatches = 'That speaker will have a hard time providing "room filling" sound due to its low bass output in your large room.'
