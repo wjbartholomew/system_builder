@@ -113,9 +113,12 @@ handleDimensions = (event, type) => {
 
 populate = () => {
     this.setState({
+        ...this.state,
         newSystem: {
             name: 'Made in Minnesota!',
-            description: 'Premium stereo with all Minnesota made components.'
+            description: 'Premium stereo with all Minnesota made components.',
+            uniqueSystemId: Math.floor((Math.random() * 1000) + 1),
+            userId: this.props.state.user.id
         }
     })
 }
